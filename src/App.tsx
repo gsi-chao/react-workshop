@@ -1,24 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import BasicButtom from "./components/buttons/BasicButtom";
+import { StyleProps } from "./types/component_style";
+import { List } from "./components/list/List";
+
+const items = [
+  { text: "Hello", date: "10/10/2020" },
+  { text: "Welcome", date: "11/10/2020" },
+  { text: "World", date: "12/10/2020" },
+];
+
+const items2 = [
+  { text: "Hello1", date: "10/10/2020" },
+  { text: "Welcome1", date: "11/10/2020" },
+  { text: "World1", date: "12/10/2020" },
+];
 
 function App() {
+  const [count, setCount] = useState<number>(0);
+  const [list, setList] = useState(items);
+  const onClick = () => {
+    setList(items2);
+  };
+
+  const asyncOnClick = () => {
+    setTimeout(() => {
+      setCount((oldValue) => oldValue + 1);
+    }, 5000);
+  };
+
+  const colorSwitch = (value: string): StyleProps => {
+    switch (value) {
+      case "red":
+        return {
+          backgroundColor: "red",
+          color: "white",
+          fontSize: 20,
+        };
+      case "blue":
+        return {
+          backgroundColor: "blue",
+          color: "white",
+          fontSize: 20,
+        };
+      default:
+        return {
+          backgroundColor: "red",
+          color: "white",
+          fontSize: 20,
+        };
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <List list={list} />
+      <BasicButtom onClick={onClick}>Random</BasicButtom>
     </div>
   );
 }
