@@ -1,62 +1,10 @@
-import React, { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import BasicButtom from "./components/buttons/BasicButtom";
-import { StyleProps } from "./types/component_style";
-import { List } from "./components/list/List";
-
-const items = [
-  { text: "Hello", date: "10/10/2020" },
-  { text: "Welcome", date: "11/10/2020" },
-  { text: "World", date: "12/10/2020" },
-];
-
-const items2 = [
-  { text: "Hello1", date: "10/10/2020" },
-  { text: "Welcome1", date: "11/10/2020" },
-  { text: "World1", date: "12/10/2020" },
-];
+import { NotesContainer } from "./modules/notes/container/NotesContainer";
 
 function App() {
-  const [count, setCount] = useState<number>(0);
-  const [list, setList] = useState(items);
-  const onClick = () => {
-    setList(items2);
-  };
-
-  const asyncOnClick = () => {
-    setTimeout(() => {
-      setCount((oldValue) => oldValue + 1);
-    }, 5000);
-  };
-
-  const colorSwitch = (value: string): StyleProps => {
-    switch (value) {
-      case "red":
-        return {
-          backgroundColor: "red",
-          color: "white",
-          fontSize: 20,
-        };
-      case "blue":
-        return {
-          backgroundColor: "blue",
-          color: "white",
-          fontSize: 20,
-        };
-      default:
-        return {
-          backgroundColor: "red",
-          color: "white",
-          fontSize: 20,
-        };
-    }
-  };
-
   return (
     <div className="App">
-      <List list={list} />
-      <BasicButtom onClick={onClick}>Random</BasicButtom>
+      <NotesContainer />
     </div>
   );
 }

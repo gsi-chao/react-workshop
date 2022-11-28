@@ -1,0 +1,9 @@
+.notes-container {
+  background-color: white;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+}
