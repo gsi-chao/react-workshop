@@ -1,5 +1,6 @@
 import React, { CSSProperties } from "react";
 import { NotesFormContainer } from "../components/notes_form/NotesFormContainer";
+import { INotesChangeProps } from "../types/notes";
 
 const leftContainerStyle: CSSProperties = {
   flex: "1",

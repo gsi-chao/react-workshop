@@ -1,5 +1,8 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useState } from "react";
+import { useContext } from "react";
 import { NotesCard } from "../components/notes_card/NotesCard";
+import NotesContext from "../store/context";
+import { INotesEventTypes } from "../store/types";
 import { INotes } from "../types/notes";
 
 const rightContainerStyle: CSSProperties = {
@@ -13,42 +16,15 @@ const rightContainerStyle: CSSProperties = {
   flexWrap: "wrap",
 };
 
-const list: INotes[] = [
-  {
-    title: "hello",
-    body: "Lorem ipsum dolor sit amet",
-  },
-  {
-    title: "hello",
-    body: "Lorem ipsum dolor sit amet",
-  },
-  {
-    title: "hello",
-    body: "Lorem ipsum dolor sit amet",
-  },
-  {
-    title: "hello",
-    body: "Lorem ipsum dolor sit amet",
-  },
-  {
-    title: "hello",
-    body: "Lorem ipsum dolor sit amet",
-  },
-  {
-    title: "hello",
-    body: "Lorem ipsum dolor sit amet",
-  },
-  {
-    title: "hello",
-    body: "Lorem ipsum dolor sit amet",
-  },
-];
-
 export const ContentContainer = () => {
+  const notesContext = useContext(NotesContext);
+  const onDelete = (id: string) => {
+    notesContext.dispatch({ type: INotesEventTypes.REMOVE_NOTE, payload: id });
+  };
   return (
     <div style={rightContainerStyle}>
-      {list.map((n) => (
-        <NotesCard />
+      {notesContext.state.list.map((n, key) => (
+        <NotesCard {...n} onDelete={onDelete} key={key.toString()} />
       ))}
     </div>
   );

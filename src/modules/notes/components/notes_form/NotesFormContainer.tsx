@@ -1,5 +1,8 @@
 import React, { CSSProperties, useState } from "react";
-import { INotes } from "../../types/notes";
+import { useContext } from "react";
+import NotesContext from "../../store/context";
+import { INotesEventTypes } from "../../store/types";
+import { INotes, INotesChangeProps } from "../../types/notes";
 import { NotesForm } from "./NotesForm";
 
 const divStyles: CSSProperties = {
@@ -15,10 +18,22 @@ const divStyles: CSSProperties = {
 };
 
 export const NotesFormContainer = () => {
-  const [value, setValue] = useState<INotes>({ title: "", body: "" });
+  const notesContext = useContext(NotesContext);
+  const [value, setValue] = useState<INotes>({ title: "", body: "", id: "" });
+
+  const onChange = (note: INotes) => {
+    notesContext.dispatch({
+      type: INotesEventTypes.ADD_NOTE,
+      payload: {
+        ...note,
+        id: window.crypto.getRandomValues(new Uint32Array(1)).toString(),
+      },
+    });
+  };
+
   return (
     <div style={divStyles}>
-      <NotesForm data={value} onChange={() => {}} />
+      <NotesForm data={value} onChange={onChange} />
     </div>
   );
 };

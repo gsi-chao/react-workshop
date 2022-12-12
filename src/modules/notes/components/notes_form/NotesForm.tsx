@@ -3,15 +3,15 @@ import { BasicBlackButtton } from "../../../../components/buttons/BasicBlackButt
 import BasicButtom from "../../../../components/buttons/BasicButtom";
 import { InputField } from "../../../../components/commons/fields/InputField";
 import { TextareaField } from "../../../../components/commons/fields/TextareaField";
-import { INotes } from "../../types/notes";
+import { INotes, INotesChangeProps } from "../../types/notes";
 
-interface Props {
+interface Props extends INotesChangeProps {
   data: INotes;
-  onChange: (data: INotes) => void;
 }
 
 export const NotesForm: React.FC<Props> = ({ data, onChange }) => {
   const [formValues, setFormValues] = useState<INotes>(data);
+
   return (
     <>
       <InputField
